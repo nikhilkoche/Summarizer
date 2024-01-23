@@ -1,7 +1,8 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from sentence_transformers import SentenceTransformer
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 from dotenv import load_dotenv
-
+import os
 load_dotenv()
 # Get the Transcript from YT
 video_url = "https://www.youtube.com/watch?v=o3K_HbpWNpgs"
@@ -17,30 +18,29 @@ try:
 except Exception as e:
     print(f"An error occured:{str(e)}")
 
-# model = SentenceTransformer('all-MiniLM-L6-v2')
-# embeddings = model.encode(subtitles_text)
-# print(embeddings)
-
 #QDRANT Create your client
 
 from qdrant_client import QdrantClient
+os.environ['QDRANT_HOST'] 
+os.environ['QDRANT_API_KEY'] 
 
-# qdrant_client = QdrantClient(
-#     url="https://3036137f-6be5-4cd3-90da-38d4e0f8aaaa.us-east4-0.gcp.cloud.qdrant.io:6333", 
-#     api_key="",
-# )
+client = qdrant_client.QdrantClient(
+        os.getenv("QDRANT_HOST"),
+        api_key=os.getenv("QDRANT_API_KEY")
+    )
 
-# from langchain_community.llms import HuggingFaceHub
-# from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
-# from langchain_community.llms import HuggingFaceTextGenInference
+# Create Collection
+os.environ['QDRANT_COLLECTION'] =''
 
-# from langchain_community.embeddings import HuggingFaceEmbeddings
-# embeddings = HuggingFaceEmbeddings()
-# query_result = embeddings.embed_query(subtitles_text)
-# print(query_result)
+collection_config = qdrant_client.http.models.VectorParams(
+        size=384, # 768 for instructor-xl, 1536 for OpenAI
+        distance=qdrant_client.http.models.Distance.COSINE
+    )
 
-# inference_api_key = ""
-# from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
+client.recreate_collection(
+    collection_name=os.getenv("QDRANT_COLLECTION"),
+    vectors_config=collection_config
+)
 
 # embeddings = HuggingFaceInferenceAPIEmbeddings(
 #     api_key=inference_api_key, model_name="sentence-transformers/all-MiniLM-l6-v2"
