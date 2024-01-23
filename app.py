@@ -1,5 +1,9 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv
+
+load_dotenv()
+
 video_url = "https://www.youtube.com/watch?v=o3K_HbpWNpgs"
 try:
     video_id = video_url.split("v=")[1]
