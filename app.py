@@ -23,7 +23,7 @@ from qdrant_client import QdrantClient
 
 # qdrant_client = QdrantClient(
 #     url="https://3036137f-6be5-4cd3-90da-38d4e0f8aaaa.us-east4-0.gcp.cloud.qdrant.io:6333", 
-#     api_key="ay21comXL-eWCIDFxkD6j_ij0kWhO1cuDCNDMT7QzMjcFr9zZPGwhg",
+#     api_key="",
 # )
 
 # from langchain_community.llms import HuggingFaceHub
@@ -35,7 +35,7 @@ from qdrant_client import QdrantClient
 # query_result = embeddings.embed_query(subtitles_text)
 # print(query_result)
 
-# inference_api_key = "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"
+# inference_api_key = ""
 # from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 
 # embeddings = HuggingFaceInferenceAPIEmbeddings(
