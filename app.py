@@ -3,7 +3,7 @@ from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 
 load_dotenv()
-
+# Get the Transcript from YT
 video_url = "https://www.youtube.com/watch?v=o3K_HbpWNpgs"
 try:
     video_id = video_url.split("v=")[1]
@@ -21,8 +21,8 @@ except Exception as e:
 # embeddings = model.encode(subtitles_text)
 # print(embeddings)
 
+#QDRANT Create your client
 
-#Create Qdrant object
 from qdrant_client import QdrantClient
 
 # qdrant_client = QdrantClient(
