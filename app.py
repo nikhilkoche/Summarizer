@@ -123,9 +123,9 @@ def main():
     trans=get_transcript(url)
     for entry in trans:
         full_transcript += entry['text']
-    for i, chunk in enumerate(text_splitter(full_transcript)):
-        print(f"CHUNK {i*1}:",chunk)
-    
+    # for i, chunk in enumerate(recursive_summarize(full_transcript)):
+    #     print(f"CHUNK {i*1}:",chunk)
+    recursive_summarize(full_transcript)
 
 
 
